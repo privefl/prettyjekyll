@@ -12,13 +12,14 @@ FormatPost(rmd, knitr.files.dir = "knitr_files", tmp.dir = "_built")
 \item{knitr.files.dir}{The permanent directory where
 the files like plots are placed.}
 
-\item{tmp.dir}{Temporary directory for the temporary html file.}
+\item{tmp.dir}{The temporary directory for the temporary html file.}
 }
 \value{
-The name (path) of the new Markdown post
+The name (path) of the new Markdown post.
 }
 \description{
-Format an R Markdown post for a Jekyll blog
+Format an R Markdown Pretty Document (package
+prettydoc) post for a Jekyll blog
 and place the resulting Markdown post in directory '_posts'.
 }
 
