@@ -46,6 +46,6 @@ output:                   # DO NOT CHANGE
     theme: cayman         # DO NOT CHANGE
     highlight: github     # DO NOT CHANGE
 ```
-
+You should directly use the R Markdown template from this package.
 
 ![](https://cdn2.iconfinder.com/data/icons/freecns-cumulus/32/519791-101_Warning-128.png) This works with all the cases that I tried. Yet, I could not test or think about every possible cases that need to be handled. If you found an error, please open an issue.
