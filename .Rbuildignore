@@ -1,2 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^codecov\.yml$
+^README\.Rmd$
+^\.travis\.yml$
+^\.codecov\.yml$
+_posts
+knitr_files
+images

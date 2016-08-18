@@ -1,0 +1,46 @@
+---
+title: A minimal R Markdown example
+date: August 15, 2016
+output: 
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+## Quotes
+
+> I love R and I like writing articles with R Markdown.
+
+## Lists
+
+This is a bullet list:
+
+- item 1,
+- item 2.
+
+This is an ordered list:
+
+1. item 3,
+2. item 4.
+
+## Equations
+
+This is an inline equation with an inline R code chunk: $\pi = `r pi`$.
+
+This is the Gaussian integral equation: $$\int_{-\infty}^{+\infty} e^{-x^2}~dx = \sqrt{\pi}.$$
+
+## Plots
+
+```{r, fig.align='center', fig.cap="This is a nice plot."}
+curve(exp(-x^2), -2.5, 2.5)
+```
+
+## Images
+
+- An image from Barry Clark's GitHub account:
+
+![Jekyll Now is the base of this template](https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png)
+
+- A local image:
+
+![Thanks GitHub for hosting my website!](../images/github-pages.jpg)

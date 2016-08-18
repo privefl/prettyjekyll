@@ -1,4 +1,15 @@
-FormatPost <- function(rmd, knitr.files.dir = "knitr_files",
+#' @title Format an R Markdown post for a Jekyll blog
+#' @description Format an R Markdown post for a Jekyll blog
+#' and place the resulting Markdown post in directory '_posts'.
+#' @param rmd The name (path) to specific Rmd file to convert.
+#' @param knitr.files.dir The permanent directory where
+#' the files like plots are placed.
+#' @param tmp.dir Temporary directory for the temporary html file.
+#' @return The name (path) of the new Markdown post
+#' @name FormatPost
+#' @export
+FormatPost <- function(rmd,
+                       knitr.files.dir = "knitr_files",
                        tmp.dir = "_built") {
   # rmd: name/path to specific Rmd file to convert
   # knitr.files.dir: The permanent directory where the files like plots
