@@ -1,0 +1,30 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+[![Build Status](https://travis-ci.org/privefl/prettyjekyll.svg?branch=master)](https://travis-ci.org/privefl/prettyjekyll)
+[![codecov](https://codecov.io/gh/privefl/prettyjekyll/branch/master/graph/badge.svg)](https://codecov.io/gh/privefl/prettyjekyll)
+[![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+ 
+---
+ 
+```{r, echo = FALSE}
+description <- readLines("DESCRIPTION")
+rvers <- stringr::str_match(grep("R \\(", description, value = TRUE), "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}")[1,1]
+```
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/prettyjekyll)](https://cran.r-project.org/package=prettyjekyll)
+```{r, echo = FALSE}
+description <- readLines("DESCRIPTION")
+version <- gsub(" ", "", gsub("Version:", "", grep("Version:", description, value = TRUE)))
+```
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master)
+ 
+---
+ 
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+
+# prettyjekyll
+Convert R Markdown Pretty Document to Jekyll Markdown.
