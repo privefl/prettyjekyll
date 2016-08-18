@@ -14,6 +14,7 @@ LazyData: TRUE
 Depends: R (>= 3.3.1)
 RoxygenNote: 5.0.1
 Imports: rmarkdown, prettydoc, gsubfn
-Suggests: testthat, covr, tcltk2
+Suggests: testthat, covr
+SystemRequirements: pandoc (>= 1.12.3)
 URL: https://github.com/privefl/prettyjekyll
 BugReports: https://github.com/privefl/prettyjekyll/issues
