@@ -26,3 +26,5 @@ Requirements and features of FormatPost
 -   It gets the main content of an HTML Pretty Document to put it in a new Markdown post that is rendered with Jekyll.
 -   It creates the name of your post's Markdown file with the current date (the date in the name is not important) and the title of your post.
 -   It makes some changes in figures' and images' paths to be recognized in the site. You should keep the default path to figures rendered by knitr. **Caching is not supported**.
+
+![](https://cdn2.iconfinder.com/data/icons/freecns-cumulus/32/519791-101_Warning-128.png) This works with all the cases that I tried. Yet, I could not test or think about every possible cases that need to be handled. If you found an error, please open an issue.
