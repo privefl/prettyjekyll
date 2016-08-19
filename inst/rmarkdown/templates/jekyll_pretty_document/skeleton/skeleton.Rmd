@@ -1,11 +1,11 @@
 ---
 title: "Your Document Title"
 author: "Document Author"
-date: "`r Sys.Date()`"
-output:                   # DO NOT CHANGE
-  prettydoc::html_pretty: # DO NOT CHANGE
-    theme: cayman         # DO NOT CHANGE
-    highlight: github     # DO NOT CHANGE
+date: "Your Document Date" # DO NOT USE Sys.Date()
+output:                    # DO NOT CHANGE
+  prettydoc::html_pretty:  # DO NOT CHANGE
+    theme: cayman          # DO NOT CHANGE
+    highlight: github      # DO NOT CHANGE
 ---
 
 ## A New Output Format
