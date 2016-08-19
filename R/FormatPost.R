@@ -25,7 +25,8 @@ FormatPost <- function(rmd,
                             prettydoc::html_pretty(highlight = "github",
                                                    self_contained = FALSE),
                             output_dir = tmp.dir,
-                            clean = FALSE)
+                            clean = FALSE,
+                            encoding = "UTF-8")
 
   # Read rmd
   lines.rmd <- readLines(rmd, encoding = "UTF-8")
