@@ -37,7 +37,8 @@ FormatPost <- function(rmd,
                         lines.html, fixed = TRUE)
   section.ends <- grep("</section>", lines.html, fixed = TRUE)
   section.end <- min(section.ends[section.ends > section.begin])
-  lines.html <- lines.html[section.begin:section.end]
+  scripts <- grep("<script src=", lines.html, fixed = TRUE)
+  lines.html <- lines.html[c(scripts, section.begin:section.end)]
 
   # get yaml header (delimited by the first '---')
   header.rmd <- grep("---", x = lines.rmd, fixed = TRUE)[2]
