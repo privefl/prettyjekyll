@@ -67,7 +67,7 @@ FormatPost <- function(rmd,
   if (length(ind > 0)) {
     for (i in ind) {
       lines.html[i] <-
-        gsubfn::gsubfn(pattern, file.path("{{ site.baseurl }}", knitr.files.dir,
+        gsubfn::gsubfn(pattern, file.path("{{ site.url }}{{ site.baseurl }}", knitr.files.dir,
                                           tmp[[i]][1]), lines.html[i])
     }
     dir.source <- file.path(tmp.dir, pattern)
@@ -82,7 +82,7 @@ FormatPost <- function(rmd,
   ind <- which(!sapply(tmp, is.null))
   for (i in ind) {
     lines.html[i] <-
-      gsubfn::gsubfn(pattern, "{{ site.baseurl }}", lines.html[i])
+      gsubfn::gsubfn(pattern, "{{ site.url }}{{ site.baseurl }}", lines.html[i])
   }
 
   # create file with new lines
