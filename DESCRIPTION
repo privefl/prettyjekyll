@@ -2,18 +2,18 @@ Encoding: UTF-8
 Package: prettyjekyll
 Type: Package
 Title: Convert R Markdown Pretty Document to Jekyll Markdown
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Florian", "Privé",
     email = "florian.prive.21@gmail.com",
     role = c("aut", "cre"))
 Description: This package converts an R Markdown Pretty Document
     (package prettydoc) to a Markdown document ready for use
-    in a Jekyll website (for blogging, for instance).
+    in a Jekyll website (for blogging).
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.3.1)
-RoxygenNote: 5.0.1
-Imports: rmarkdown (>= 1.0), prettydoc, gsubfn
+RoxygenNote: 6.0.1
+Imports: rmarkdown (>= 1.0), prettydoc, gsubfn, glue, readr
 Suggests: testthat, covr
 SystemRequirements: pandoc (>= 1.12.3)
 URL: https://github.com/privefl/prettyjekyll
