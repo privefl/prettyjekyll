@@ -8,6 +8,7 @@ new_yaml_header <- function(yaml) {
   glue::glue(
     "---",
     "title: {yaml$title}",
+    `if`(is.null(yaml$subtitle), "", "subtitle: {yaml$subtitle}"),
     `if`(is.null(yaml$author), "", "author: {yaml$author}"),
     "date: {yaml$date}",
     "layout: post",
