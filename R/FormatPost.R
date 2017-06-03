@@ -92,7 +92,7 @@ FormatPost <- function(rmd,
   if (tools::file_ext(rmd) != "Rmd") stop("Input shoud be an R Markdown file")
 
   # get YAML header
-  yaml <- rmarkdown::yaml_front_matter(rmd)
+  yaml <- rmarkdown::yaml_front_matter(rmd, encoding = "UTF-8")
   yaml.new <- new_yaml_header(yaml)
 
   # get html lines
