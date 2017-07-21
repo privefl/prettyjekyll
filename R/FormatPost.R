@@ -2,15 +2,15 @@
 
 new_yaml_header <- function(yaml) {
 
-  if (is.null(yaml$title)) stop("Your document should have an YAML title.")
-  if (is.null(yaml$date)) stop("Your document should have an YAML date.")
+  if (is.null(yaml$title)) stop("Your document should have a YAML title.")
+  if (is.null(yaml$date)) stop("Your document should have a YAML date.")
 
   glue::glue(
     "---",
-    "title: {yaml$title}",
-    `if`(is.null(yaml$subtitle), "", "subtitle: {yaml$subtitle}"),
-    `if`(is.null(yaml$author), "", "author: {yaml$author}"),
-    "date: {yaml$date}",
+    "title: \"{yaml$title}\"",
+    `if`(is.null(yaml$subtitle), "", "subtitle: \"{yaml$subtitle}\""),
+    `if`(is.null(yaml$author), "", "author: \"{yaml$author}\""),
+    "date: \"{yaml$date}\"",
     "layout: post",
     "---",
     .sep = "\n"
@@ -99,10 +99,14 @@ FormatPost <- function(rmd,
   lines.html <- format_html(rmd, knitr.files.dir, tmp.dir)
 
   # get the right name output format
+  format.title <- gsub("[ ]{1,}", "-", tolower(yaml$title))
+  for (pattern in c(":", "(", ")")) {
+    format.title <- gsub(pattern, "", format.title, fixed = TRUE)
+  }
   md.path <- file.path("_posts", sprintf(
     "%s-%s.md",
     readr::parse_date(yaml$date, format = date.format, locale = date.locale),
-    gsub("[ ]{1,}", "-", yaml$title)))
+    format.title))
   # create file with new lines
   if (!dir.exists("_posts")) dir.create("_posts")
   writeLines(c(yaml.new, "", lines.html), md.path, useBytes = FALSE)
