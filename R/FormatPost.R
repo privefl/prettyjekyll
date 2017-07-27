@@ -38,7 +38,7 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
                         lines.html, fixed = TRUE)
   section.ends <- grep("</section>", lines.html, fixed = TRUE)
   section.end <- min(section.ends[section.ends > section.begin])
-  lines.html <- lines.html[section.begin:section.end]
+  lines.html <- c(scripts, "", lines.html[section.begin:section.end])
 
   # Change path of figures and images
   patterns <- c(
@@ -59,7 +59,7 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
   file.copy(from = file.path(tmp.dir, patterns[1]), to = knitr.files.dir,
             overwrite = TRUE, recursive = TRUE)
 
-  c(scripts, "", lines.html)
+  lines.html
 }
 
 ################################################################################
