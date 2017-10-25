@@ -100,7 +100,7 @@ FormatPost <- function(rmd,
 
   # get the right name output format
   format.title <- gsub("[ ]{1,}", "-", tolower(yaml$title))
-  for (pattern in c(":", "(", ")")) {
+  for (pattern in c(":", ",", "(", ")")) {
     format.title <- gsub(pattern, "", format.title, fixed = TRUE)
   }
   md.path <- file.path("_posts", sprintf(
