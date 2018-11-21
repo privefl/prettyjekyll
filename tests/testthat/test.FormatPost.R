@@ -1,4 +1,4 @@
-context("FORMATPOST")
+context("FORMAT_POST")
 
 rmd <- file.path("_knitr", "knitr-minimal.Rmd")
 new.post <- FormatPost(rmd)

@@ -19,15 +19,22 @@ new_yaml_header <- function(yaml) {
 
 ################################################################################
 
+norm_src <- function(path, dir) {
+  withr::with_dir(dir, {
+    sprintf('src="%s"', normalizePath(path, mustWork = FALSE))
+  })
+}
+
 format_html <- function(rmd, knitr.files.dir, tmp.dir) {
 
   # knit
-  html <- rmarkdown::render(rmd,
-                            prettydoc::html_pretty(highlight = "github",
-                                                   self_contained = FALSE),
-                            output_dir = tmp.dir,
-                            clean = FALSE,
-                            encoding = "UTF-8")
+  html <- rmarkdown::render(
+    rmd,
+    prettydoc::html_pretty(highlight = "github", self_contained = FALSE),
+    output_dir = tmp.dir,
+    clean = FALSE,
+    encoding = "UTF-8"
+  )
 
   # Read html
   lines.html <- readLines(html)
@@ -41,18 +48,20 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
   lines.html <- c(scripts, "", lines.html[section.begin:section.end])
 
   # Change path of figures and images
-  patterns <- c(
+  patterns <- list(
     sub("\\.Rmd$", "_files", basename(rmd)),
+    'src="(.*?)"',
     getwd(),
     gsub("\\", "\\\\", normalizePath(getwd()), fixed = TRUE)
   )
-  replacements <- c(
+  replacements <- list(
     file.path("{{ site.url }}{{ site.baseurl }}", knitr.files.dir, patterns[1]),
+    function(path) norm_src(path, dirname(rmd)),
     "{{ site.url }}{{ site.baseurl }}",
     "{{ site.url }}{{ site.baseurl }}"
   )
   for (i in seq_along(patterns)) {
-    lines.html <- gsubfn::gsubfn(patterns[i], replacements[i], lines.html)
+    lines.html <- gsubfn::gsubfn(patterns[[i]], replacements[[i]], lines.html)
   }
   # And move figure objects
   if (!dir.exists(knitr.files.dir)) dir.create(knitr.files.dir)
