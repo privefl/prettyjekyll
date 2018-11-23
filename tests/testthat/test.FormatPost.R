@@ -1,5 +1,11 @@
 context("FORMAT_POST")
 
+cat("\n-----------------------------\n")
+cat(getwd())
+cat("\n-----------------------------\n")
+
+unlink(c("_posts", "knitr_files"), recursive = TRUE)
+
 rmd <- file.path("_knitr", "knitr-minimal.Rmd")
 new.post <- FormatPost(rmd)
 
@@ -19,6 +25,6 @@ new.post.content <- readLines(new.post, encoding = "UTF-8")
 
 test_that("Expected content", {
   expect_equal(sum(grepl(getwd(), new.post.content, fixed = TRUE)), 0)
-  print(siteurl <- grepl("{{ site.baseurl }}", new.post.content, fixed = TRUE))
+  siteurl <- grepl("{{ site.baseurl }}", new.post.content, fixed = TRUE)
   expect_equal(sum(siteurl), 2)
 })

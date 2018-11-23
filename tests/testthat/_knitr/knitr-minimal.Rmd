@@ -43,4 +43,4 @@ curve(exp(-x^2), -2.5, 2.5)
 
 - A local image:
 
-![Thanks GitHub for hosting my website!](../images/github-pages.jpg)
+![Thanks GitHub for hosting my website!](../github-pages.jpg)
