@@ -19,22 +19,33 @@ new_yaml_header <- function(yaml) {
 
 ################################################################################
 
+my_render <- function(rmd, tmp.dir) {
+  cl <- parallel::makePSOCKcluster(1)
+  on.exit(parallel::stopCluster(cl), add = TRUE)
+  parallel::clusterExport(cl, c("rmd", "tmp.dir"), envir = environment())
+  parallel::clusterEvalQ(cl, {
+    rmarkdown::render(
+      rmd,
+      prettydoc::html_pretty(highlight = "github", self_contained = FALSE),
+      output_dir = tmp.dir,
+      clean = FALSE,
+      encoding = "UTF-8"
+    )
+  })[[1]]
+}
+
 norm_src <- function(path, dir) {
   withr::with_dir(dir, {
     sprintf('src="%s"', normalizePath(path, mustWork = FALSE))
   })
 }
 
+################################################################################
+
 format_html <- function(rmd, knitr.files.dir, tmp.dir) {
 
   # knit
-  html <- rmarkdown::render(
-    rmd,
-    prettydoc::html_pretty(highlight = "github", self_contained = FALSE),
-    output_dir = tmp.dir,
-    clean = FALSE,
-    encoding = "UTF-8"
-  )
+  html <- my_render(rmd, tmp.dir)
 
   # Read html
   lines.html <- readLines(html)
