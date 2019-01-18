@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/privefl/prettyjekyll.svg?branch=master)](https://travis-ci.org/privefl/prettyjekyll) [![codecov](https://codecov.io/gh/privefl/prettyjekyll/branch/master/graph/badge.svg)](https://codecov.io/gh/privefl/prettyjekyll)
+[![Build Status](https://travis-ci.org/privefl/prettyjekyll.svg?branch=master)](https://travis-ci.org/privefl/prettyjekyll)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/privefl/prettyjekyll?branch=master&svg=true)](https://ci.appveyor.com/project/privefl/prettyjekyll)
+[![codecov](https://codecov.io/gh/privefl/prettyjekyll/branch/master/graph/badge.svg)](https://codecov.io/gh/privefl/prettyjekyll)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/prettyjekyll)](https://cran.r-project.org/package=prettyjekyll)
 
 prettyjekyll
