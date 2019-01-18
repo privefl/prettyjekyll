@@ -20,15 +20,12 @@ new_yaml_header <- function(yaml) {
 ################################################################################
 
 my_render <- function(rmd) {
+  format <- prettydoc::html_pretty(highlight = "github", self_contained = FALSE)
   cl <- parallel::makePSOCKcluster(1)
   on.exit(parallel::stopCluster(cl), add = TRUE)
-  parallel::clusterExport(cl, "rmd", envir = environment())
+  parallel::clusterExport(cl, c("rmd", "format"), envir = environment())
   parallel::clusterEvalQ(cl, {
-    rmarkdown::render(
-      rmd,
-      prettydoc::html_pretty(highlight = "github", self_contained = FALSE),
-      encoding = "UTF-8"
-    )
+    rmarkdown::render(rmd, format, encoding = "UTF-8")
   })[[1]]
 }
 
