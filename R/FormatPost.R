@@ -33,8 +33,10 @@ my_render <- function(rmd) {
 }
 
 norm_src <- function(path, dir) {
+  path <- tryCatch(normalizePath(path, mustWork = TRUE),
+                   error = function(e) path)
   withr::with_dir(dir, {
-    sprintf('src="%s"', normalizePath(path, mustWork = FALSE))
+    sprintf('src="%s"', path)
   })
 }
 
