@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 _posts
-knitr_files
 *.html
+*_files/

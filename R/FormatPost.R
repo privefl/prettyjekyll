@@ -19,16 +19,14 @@ new_yaml_header <- function(yaml) {
 
 ################################################################################
 
-my_render <- function(rmd, tmp.dir) {
+my_render <- function(rmd) {
   cl <- parallel::makePSOCKcluster(1)
   on.exit(parallel::stopCluster(cl), add = TRUE)
-  parallel::clusterExport(cl, c("rmd", "tmp.dir"), envir = environment())
+  parallel::clusterExport(cl, "rmd", envir = environment())
   parallel::clusterEvalQ(cl, {
     rmarkdown::render(
       rmd,
       prettydoc::html_pretty(highlight = "github", self_contained = FALSE),
-      output_dir = tmp.dir,
-      clean = FALSE,
       encoding = "UTF-8"
     )
   })[[1]]
@@ -42,10 +40,10 @@ norm_src <- function(path, dir) {
 
 ################################################################################
 
-format_html <- function(rmd, knitr.files.dir, tmp.dir) {
+format_html <- function(rmd, knitr.files.dir) {
 
   # knit
-  html <- my_render(rmd, tmp.dir)
+  html <- my_render(rmd)
 
   # Read html
   lines.html <- readLines(html)
@@ -62,21 +60,23 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
   patterns <- list(
     sub("\\.Rmd$", "_files", basename(rmd)),
     'src="(.*?)"',
+    'src="(.*?)"',
     getwd(),
     gsub("\\", "\\\\", normalizePath(getwd()), fixed = TRUE)
   )
   replacements <- list(
     file.path("{{ site.url }}{{ site.baseurl }}", knitr.files.dir, patterns[1]),
     function(path) norm_src(path, dirname(rmd)),
+    function(path) norm_src(path, getwd()),
     "{{ site.url }}{{ site.baseurl }}",
     "{{ site.url }}{{ site.baseurl }}"
   )
   for (i in seq_along(patterns)) {
     lines.html <- gsubfn::gsubfn(patterns[[i]], replacements[[i]], lines.html)
   }
-  # And move figure objects
+  # And move figure directory
   if (!dir.exists(knitr.files.dir)) dir.create(knitr.files.dir)
-  file.copy(from = file.path(tmp.dir, patterns[1]), to = knitr.files.dir,
+  file.copy(from = sub("\\.Rmd$", "_files", rmd), to = knitr.files.dir,
             overwrite = TRUE, recursive = TRUE)
 
   lines.html
@@ -92,7 +92,6 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
 #' @param rmd The name (path) to specific Rmd file to convert.
 #' @param knitr.files.dir The permanent directory where
 #' the files like plots are placed.
-#' @param tmp.dir The temporary directory for the temporary html file.
 #' @param date.format Format of the date used in the YAML header.
 #' Default corresponds for example to "August 15, 2016".
 #' @param date.locale A locale object, defining the defaults of a country.
@@ -104,7 +103,6 @@ format_html <- function(rmd, knitr.files.dir, tmp.dir) {
 #' @export
 FormatPost <- function(rmd,
                        knitr.files.dir = "knitr_files",
-                       tmp.dir = "_built",
                        date.format = "%B %d, %Y",
                        date.locale = readr::locale(tz = "US/Central")) {
 
@@ -116,7 +114,7 @@ FormatPost <- function(rmd,
   yaml.new <- new_yaml_header(yaml)
 
   # get html lines
-  lines.html <- format_html(rmd, knitr.files.dir, tmp.dir)
+  lines.html <- format_html(rmd, knitr.files.dir)
 
   # get the right name output format
   format.title <- gsub("[ ]{1,}", "-", tolower(yaml$title))
@@ -127,14 +125,10 @@ FormatPost <- function(rmd,
     "%s-%s.md",
     readr::parse_date(yaml$date, format = date.format, locale = date.locale),
     format.title))
+
   # create file with new lines
   if (!dir.exists("_posts")) dir.create("_posts")
   writeLines(c(yaml.new, "", lines.html), md.path, useBytes = FALSE)
-
-  # remove temporary directory and clean build files
-  unlink(tmp.dir, recursive = TRUE)
-  file.remove(sub(pattern = "\\.Rmd$", ".knit.md", rmd))
-  file.remove(sub(pattern = "\\.Rmd$", ".utf8.md", rmd))
 
   return(md.path)
 }
