@@ -4,7 +4,7 @@
 \alias{FormatPost}
 \title{Format an R Markdown post for a Jekyll blog}
 \usage{
-FormatPost(rmd, knitr.files.dir = "knitr_files", tmp.dir = "_built",
+FormatPost(rmd, knitr.files.dir = "knitr_files",
   date.format = "\%B \%d, \%Y", date.locale = readr::locale(tz =
   "US/Central"))
 }
@@ -13,8 +13,6 @@ FormatPost(rmd, knitr.files.dir = "knitr_files", tmp.dir = "_built",
 
 \item{knitr.files.dir}{The permanent directory where
 the files like plots are placed.}
-
-\item{tmp.dir}{The temporary directory for the temporary html file.}
 
 \item{date.format}{Format of the date used in the YAML header.
 Default corresponds for example to "August 15, 2016".}
