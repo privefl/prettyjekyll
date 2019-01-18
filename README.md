@@ -27,4 +27,4 @@ Requirements and features of FormatPost
     
     - makes some changes in figures' and images' paths to be recognized in the site. 
     
-You can keep the default path to figures rendered by knitr. **Caching is not supported**. You should directly use the R Markdown template from this package.
+You can keep the default path to figures rendered by knitr. Caching is now supported starting with version 0.2.3. You should directly use the R Markdown template from this package.
