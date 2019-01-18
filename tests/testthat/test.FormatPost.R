@@ -1,8 +1,5 @@
 context("FORMAT_POST")
 
-# https://github.com/hadley/testthat/issues/567
-Sys.unsetenv("R_TESTS")
-
 cat("\n-----------------------------\n")
 cat(getwd())
 cat("\n-----------------------------\n")

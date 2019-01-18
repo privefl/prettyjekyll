@@ -23,6 +23,5 @@ Imports:
     rmarkdown (>= 1.0),
     withr
 Suggests: testthat, covr
-SystemRequirements: pandoc (>= 1.12.3)
 URL: https://github.com/privefl/prettyjekyll
 BugReports: https://github.com/privefl/prettyjekyll/issues
